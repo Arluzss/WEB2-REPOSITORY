@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BorrowingController;
+use App\Http\Controllers\UserController;
+
+Route::resource('users', UserController::class)->except(['create', 'store', 'destroy']);
 
 Route::resource('categories', CategoryController::class);
 
@@ -24,6 +28,14 @@ Route::resource('books', BookController::class)->except(['create', 'store']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('/books/{book}/borrow', [BorrowingController::class, 'store'])->name('books.borrow');
+
+// Rota para listar o histórico de empréstimos de um usuário
+Route::get('/users/{user}/borrowings', [BorrowingController::class, 'userBorrowings'])->name('users.borrowings');
+
+// Rota para registrar a devolução
+Route::patch('/borrowings/{borrowing}/return', [BorrowingController::class, 'returnBook'])->name('borrowings.return');
 
 // Auth::routes();
 

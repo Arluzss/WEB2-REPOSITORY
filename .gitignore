@@ -1,0 +1,14 @@
+vendor/
+node_modules/
+public/storage
+storage/*.key
+.env
+.phpunit.result.cache
+composer.lock
+yarn.lock
+npm-debug.log
+.idea/
+.vscode/
+.DS_Store
+*.log
+.history
